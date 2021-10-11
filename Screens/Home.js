@@ -1,17 +1,59 @@
-import React from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import Categories from '../Components/Categories'
 import HeaderTabs from '../Components/HeaderTabs'
 import SearchBar from '../Components/SearchBar'
+import ResturantItems, { LocalResturants } from '../Components/ResturantItems'
+
+
+
+const YELP_API_KEY = "_R6U1T2m25B07OxYcxTu2qwTeaqvyEQVKVo5-jizULMbgUNYGpOXt9aixO9PSPPbZ88NPQym2NWJ4VTTbDsh9tdneBmTcLekU_OMERPLt153p-xGs_9x5-0zx9o5X3Yx"
 
 export default function Home() {
+
+    const [resturantData, setResturantData] = useState(LocalResturants)
+    const [city, setCity] = useState("San Francisco");
+    const [activeTab, setActiveTab] = useState("Delivery");
+
+    const getResturantFromYelp = () => {
+        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`
+
+
+
+        const apiOptions = {
+            headers: {
+                Authorization: `Bearer ${YELP_API_KEY}`,
+            },
+        };
+
+        return fetch(yelpUrl, apiOptions)
+            .then((res) => res.json())
+            .then((json) => setResturantData(
+                json.businesses.filter((bussines) =>
+                    bussines.transactions.includes(activeTab.toLowerCase())
+                )
+            ));
+    }
+
+
+    useEffect(() => {
+        getResturantFromYelp()
+    }, [city, activeTab])
+
+
     return (
         <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
             <View style={{ backgroundColor: 'white', padding: 15 }}>
-                <HeaderTabs />
-                <SearchBar />
+                <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                <SearchBar cityHandler={setCity} />
             </View>
-            <Categories />
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Categories />
+                <ResturantItems
+                    resturantData={resturantData}
+                />
+            </ScrollView>
         </SafeAreaView>
     )
 }
+
