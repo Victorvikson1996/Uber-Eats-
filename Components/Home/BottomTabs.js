@@ -23,16 +23,18 @@ export default function BottomTabs() {
 
 const Icon = (props) => {
   return (
-    <View>
-      <FontAwesome5
-        name={props.icon}
-        size={25}
-        style={{
-          margin: 3,
-          alignSelf: "center",
-        }}
-      />
-      <Text>{props.text}</Text>
-    </View>
+    <TouchableOpacity>
+      <View>
+        <FontAwesome5
+          name={props.icon}
+          size={25}
+          style={{
+            margin: 3,
+            alignSelf: "center",
+          }}
+        />
+        <Text>{props.text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
