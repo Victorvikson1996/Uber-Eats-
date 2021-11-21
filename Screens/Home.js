@@ -13,9 +13,9 @@ const YELP_API_KEY =
   "_R6U1T2m25B07OxYcxTu2qwTeaqvyEQVKVo5-jizULMbgUNYGpOXt9aixO9PSPPbZ88NPQym2NWJ4VTTbDsh9tdneBmTcLekU_OMERPLt153p-xGs_9x5-0zx9o5X3Yx";
 
 export default function Home() {
-  const [resturantData, setResturantData] = useState(LocalResturants);
-  const [city, setCity] = useState("San Francisco");
-  const [activeTab, setActiveTab] = useState("Delivery");
+  const [ resturantData, setResturantData ] = useState(LocalResturants);
+  const [ city, setCity ] = useState("San Francisco");
+  const [ activeTab, setActiveTab ] = useState("Delivery");
 
   const getResturantFromYelp = () => {
     const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
@@ -39,7 +39,7 @@ export default function Home() {
 
   useEffect(() => {
     getResturantFromYelp();
-  }, [city, activeTab]);
+  }, [ city, activeTab ]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>

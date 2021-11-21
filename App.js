@@ -5,5 +5,9 @@ import Home from "./Screens/Home";
 import ResturantDetail from "./Screens/ResturantDetail";
 
 export default function App() {
-  return <ResturantDetail />;
+  return (
+    <ResturantDetail />
+  )
+
 }
+
