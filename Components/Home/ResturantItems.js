@@ -6,14 +6,14 @@ export const LocalResturants = [
     {
         name: "Ntachi",
         image_url: "https://images.unsplash.com/photo-1626777552795-3a5e3f6ee7ec?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHJlc3R1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-        categories: ["Soup", "Bar"],
+        categories: [ "Soup", "Bar" ],
         reviews: 558,
         rating: 9.8
     },
     {
         name: "Sarova Potico",
         image_url: "https://images.unsplash.com/photo-1599354607459-81c8b0d90bf5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1167&q=80",
-        categories: ["Fried Rice", "Pasta"],
+        categories: [ "Fried Rice", "Pasta" ],
         reviews: 69,
         rating: 9.8,
 
@@ -21,14 +21,14 @@ export const LocalResturants = [
     {
         name: "Eat More",
         image_url: "https://images.unsplash.com/photo-1626777552795-3a5e3f6ee7ec?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHJlc3R1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-        categories: ["Cake", "Ice Creame"],
+        categories: [ "Cake", "Ice Creame" ],
         reviews: 2554,
         rating: 6.8
     },
     {
         name: "More Eat",
         image_url: "https://images.unsplash.com/photo-1615750824528-4398b8e5cd93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-        categories: ["Chinese", "Bar"],
+        categories: [ "Chinese", "Bar" ],
         reviews: 685,
         rating: 5.5,
     },
@@ -37,23 +37,38 @@ export const LocalResturants = [
 
 
 
-export default function ResturantItems(props) {
+export default function ResturantItems({ navigation, ...props }) {
     return (
-        <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
-            {props.resturantData.map((resturant, index) => (
-                <View key={index} style={{ marginTop: 10, padding: 15, backgroundColor: 'white' }}>
-                    <ResturantImage image={resturant.image_url} />
-                    <ResturantInfo
-                        name={resturant.name}
-                        rating={resturant.rating}
+        <>
+            {
+                props.resturantData.map((resturant, index) => (
+                    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}
+                        onPress={() =>
+                            navigation.navigate("ResturantDetail", {
+                                name: resturant.name,
+                                image: resturant.image_url,
+                                price: resturant.price,
+                                reviews: resturant.reviews_count,
+                                rating: resturant.rating,
+                                categories: resturant.categories
 
-                    />
-                </View>
-            ))}
+                            }
+                            )}>
 
-        </TouchableOpacity>
+                        <View key={index} style={{ marginTop: 10, padding: 15, backgroundColor: 'white' }}>
+                            <ResturantImage image={resturant.image_url} />
+                            <ResturantInfo
+                                name={resturant.name}
+                                rating={resturant.rating}
 
-    )
+                            />
+                        </View>
+                    </TouchableOpacity>
+                ))
+            }
+
+        </>
+    );
 }
 
 

@@ -12,7 +12,7 @@ import BottomTabs from "../Components/Home/BottomTabs";
 const YELP_API_KEY =
   "_R6U1T2m25B07OxYcxTu2qwTeaqvyEQVKVo5-jizULMbgUNYGpOXt9aixO9PSPPbZ88NPQym2NWJ4VTTbDsh9tdneBmTcLekU_OMERPLt153p-xGs_9x5-0zx9o5X3Yx";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [ resturantData, setResturantData ] = useState(LocalResturants);
   const [ city, setCity ] = useState("San Francisco");
   const [ activeTab, setActiveTab ] = useState("Delivery");
@@ -49,7 +49,7 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <ResturantItems resturantData={resturantData} />
+        <ResturantItems resturantData={resturantData} navigation={navigation} />
       </ScrollView>
       <Divider width={1} />
       <BottomTabs />
