@@ -4,23 +4,27 @@ import { View, Text, Image } from "react-native";
 
 
 
-const yelpResturantInfo = {
-  name: "Farmhouse Kitchen Thai Kitchen",
-  image: "https://images.unsplash.com/photo-1626777553635-be342a766750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1331&q=80",
-  price: "$13.50",
-  rating: 4.5,
-  reviews: '1500',
-  categories: [ { title: 'Thai' }, { title: 'Comfortfood' } ]
-}
-
-const { name, image, price, reviews, rating, categories } = yelpResturantInfo
-
-const formattedCategories = categories.map((cat) => cat.title).join(" · ")
-
-const description = `${formattedCategories} ${price ? "·" + price : ""} · 💳 · ${rating} 🌟(${reviews}+)`;
+// const yelpResturantInfo = {
+//   name: "Farmhouse Kitchen Thai Kitchen",
+//   image: "https://images.unsplash.com/photo-1626777553635-be342a766750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1331&q=80",
+//   price: "$13.50",
+//   rating: 4.5,
+//   reviews: '1500',
+//   categories: [ { title: 'Thai' }, { title: 'Comfortfood' } ]
+// }
 
 
-export default function About() {
+
+export default function About(props) {
+
+
+  const { name, image, price, reviews, rating, categories } = props.route.params
+
+  const formattedCategories = categories.map((cat) => cat.title).join(" · ")
+
+  const description = `${formattedCategories} ${price ? "·" + price : ""} · 💳 · ${rating} 🌟(${reviews}+)`;
+
+
   return (
     <View>
       <ResturantImage image={image} />

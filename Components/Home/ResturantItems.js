@@ -39,10 +39,11 @@ export const LocalResturants = [
 
 export default function ResturantItems({ navigation, ...props }) {
     return (
+
         <>
             {
                 props.resturantData.map((resturant, index) => (
-                    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}
+                    <TouchableOpacity key={index} activeOpacity={1} style={{ marginBottom: 30 }}
                         onPress={() =>
                             navigation.navigate("ResturantDetail", {
                                 name: resturant.name,
@@ -51,11 +52,10 @@ export default function ResturantItems({ navigation, ...props }) {
                                 reviews: resturant.reviews_count,
                                 rating: resturant.rating,
                                 categories: resturant.categories
-
                             }
                             )}>
 
-                        <View key={index} style={{ marginTop: 10, padding: 15, backgroundColor: 'white' }}>
+                        <View style={{ marginTop: 10, padding: 15, backgroundColor: 'white' }}>
                             <ResturantImage image={resturant.image_url} />
                             <ResturantInfo
                                 name={resturant.name}
