@@ -15,6 +15,9 @@ import { View, Text, Image } from "react-native";
 
 
 
+
+
+
 export default function About(props) {
 
 
@@ -50,7 +53,7 @@ const ResturantName = (props) => {
     <Text
       style={{
         fontSize: 29,
-        fontWeight: "400",
+        fontWeight: "600",
         marginTop: 10,
         marginHorizontal: 15,
       }}

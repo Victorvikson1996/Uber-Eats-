@@ -3,36 +3,8 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import { Divider } from 'react-native-elements/dist/divider/Divider'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-
-const foods = [
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and sauce ",
-        price: "$13.50",
-        image: "https://media.istockphoto.com/photos/hot-dogs-for-game-day-picture-id1326146587?b=1&k=20&m=1326146587&s=170667a&w=0&h=PXRYyxj4ZN5HXPzQIRG8t5a-B4Np0z-vqVWlRYDQ7g4="
-    },
-    {
-        title: "Bread",
-        description: "With butter lettuce, tomato and sauce ",
-        price: "$13.50",
-        image: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-    },
-    {
-        title: "Burger",
-        description: "With butter lettuce, tomato and sauce ",
-        price: "$13.50",
-        image: "https://media.istockphoto.com/photos/hot-dogs-for-game-day-picture-id1326146587?b=1&k=20&m=1326146587&s=170667a&w=0&h=PXRYyxj4ZN5HXPzQIRG8t5a-B4Np0z-vqVWlRYDQ7g4="
-    },
-    {
-        title: "Lasagna",
-        description: "With butter lettuce, tomato and sauce ",
-        price: "$13.50",
-        image: "https://media.istockphoto.com/photos/hot-dogs-for-game-day-picture-id1326146587?b=1&k=20&m=1326146587&s=170667a&w=0&h=PXRYyxj4ZN5HXPzQIRG8t5a-B4Np0z-vqVWlRYDQ7g4="
-    }
-
-]
 
 
 
@@ -41,7 +13,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         margin: 20,
-        paddingVertical: 13
+
     },
     titleStyle: {
         fontSize: 19,
@@ -51,7 +23,7 @@ const styles = StyleSheet.create({
 
 
 
-export default function MenuItems({ resturantName }) {
+export default function MenuItems({ foods, resturantName, hideCheckbox, marginLeft }) {
 
 
     const dispatch = useDispatch();
@@ -68,18 +40,30 @@ export default function MenuItems({ resturantName }) {
     }
 
 
+    const cartItems = useSelector(
+        (state) => state.cartReducer.selectedItems.items)
+
+
+    const isFoodInCart = (food, cartItems) => Boolean(cartItems.find((item) => item.title === food.title))
+
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {foods.map((food, index) => (
                 <View key={index}>
                     <View style={styles.menuItemStyle}>
-                        <BouncyCheckbox
-                            fillColor="green"
-                            iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
-                            onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-                        />
+                        {hideCheckbox ? (
+                            <></>
+                        ) : (
+                            <BouncyCheckbox
+                                fillColor="green"
+                                iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                                isChecked={isFoodInCart(food, cartItems)}
+                            />
+                        )}
                         <FoodInfo food={food} />
-                        <FoodImage food={food} />
+                        <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
                     </View>
                     <Divider width={0.5} orientation="vertical"
                         style={{ marginHorizontal: 20 }}
@@ -103,12 +87,12 @@ const FoodInfo = (props) => {
 }
 
 
-const FoodImage = (props) => {
+const FoodImage = ({ marginLeft, ...props }) => {
     return (
         <View>
             <Image
                 source={{ uri: props.food.image }}
-                style={{ width: 100, height: 100, borderRadius: 8 }
+                style={{ width: 100, height: 100, borderRadius: 8, marginLeft: marginLeft }
                 } />
         </View>
     )
