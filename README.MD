@@ -19,20 +19,20 @@
 
 ## Install & Build 
 
-First, make sure you have Expo CLI installed: `npm install -g expo-cli`
+First, make sure you have Expo CLI installed: 
+
+`npm install -g expo-cli`
 
 Install: `yarn` or `yarn install`
 
 Run Project Locally: `yarn dev` or `yarn start`
+
+
 <p float="left">
-  <img src="screenshots/First.PNG?raw=true" width="100" />
-  <img src="screenshots/Second.PNG?raw=true" width="100" />
-  <img src="screenshots/Third.PNG?raw=true" width="100" />
-  <img src="screenshots/Fourth.PNG?raw=true" width="100" />
-  <img src="screenshots/Fifth.PNG?raw=true" width="100" />
+  <img src="screenshots/First.PNG?raw=true" width="360" />
+  <img src="screenshots/Second.PNG?raw=true" width="360" />
+  <img src="screenshots/Third.PNG?raw=true" width="360" />
+  <img src="screenshots/Fourth.PNG?raw=true" width="360" />
+  <img src="screenshots/Fifth.PNG?raw=true" width="360" />
 </p>
 
-
-<p align="center">
-  <img src="Images/Market.png?raw=true" width="360" />
-</p>
