@@ -13,9 +13,6 @@
 - Google Api
 - Firebase
 
-<p align="center">
-  <img src="Images/project.png?raw=true" />
-</p>
 
 ## Install & Build 
 
